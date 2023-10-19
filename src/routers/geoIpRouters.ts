@@ -6,7 +6,7 @@ const geoIpRouter = Router();
 
 geoIpRouter.get("/", (req: Request, res: Response) => {
   const clientIp = requestIp.getClientIp(req);
-  const clientGeoLocation = clientIp.getClientGeoLocation(clientIp);
+  const clientGeoLocation = geoip.lookup(clientIp);
   console.log(clientIp);
   res.status(200).json({
     ip: clientIp,
