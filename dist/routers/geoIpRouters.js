@@ -6,7 +6,8 @@ const requestIp = require("request-ip");
 const geoIpRouter = (0, express_1.Router)();
 geoIpRouter.get("/", (req, res) => {
     const clientIp = requestIp.getClientIp(req);
+    const clientGeoLocation = clientIp.getClientGeoLocation(clientIp);
     console.log(clientIp);
-    res.send(clientIp);
+    res.status(200).json(Object.assign({ ip: clientIp }, clientGeoLocation));
 });
 exports.default = geoIpRouter;
