@@ -1,13 +1,14 @@
 import { Request, Response, Router } from "express";
+const geoip = require("geoip-lite");
+const requestIp = require("request-ip");
 
 const geoIpRouter = Router();
-var geoip = require("geoip-lite");
+
 geoIpRouter.get("/", (req: Request, res: Response) => {
-  const reqJson = req;
-  const clientIP =
-    req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-  const clientGeoLocation = geoip.lookup(clientIP);
-  res.status(200).json({ ...clientGeoLocation });
+  const clientIp = requestIp.getClientIp(req);
+
+  console.log(clientIp);
+  res.send(clientIp);
 });
 
 export default geoIpRouter;
