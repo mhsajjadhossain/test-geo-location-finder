@@ -1,17 +1,10 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
+import { getUserGeoIpLocation } from "../controllers/geoIpControllers";
 const geoip = require("geoip-lite");
 const requestIp = require("request-ip");
 
 const geoIpRouter = Router();
 
-geoIpRouter.get("/", (req: Request, res: Response) => {
-  const clientIp = requestIp.getClientIp(req);
-  const clientGeoLocation = geoip.lookup(clientIp);
-  console.log(clientIp);
-  res.status(200).json({
-    ip: clientIp,
-    ...clientGeoLocation,
-  });
-});
+geoIpRouter.get("/", getUserGeoIpLocation);
 
 export default geoIpRouter;
