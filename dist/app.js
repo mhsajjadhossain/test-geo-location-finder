@@ -11,11 +11,5 @@ exports.app = app;
 app.use("/geo-location", geoIpRouters_1.default);
 // Define a simple route
 app.get("/", (req, res) => {
-    res
-        .status(200)
-        .json({ message: "Welcome to your Express.js with TypeScript app!" });
-});
-// Define another route
-app.get("/about", (req, res) => {
-    res.status(200).json({ message: "This is the about page." });
+    res.status(200).json({ message: "Welcome to test geo ip location" });
 });
